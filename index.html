@@ -49,7 +49,7 @@
   <body>
     <div class="title-container">
       <h1 class="title">Roy's Snake Game</h1>
-      <span class="score" id="score">Score: 0</span>
+      <span class="score" id="score">Score: 1</span>
     </div>
     <canvas style="color: black" width="400" height="400" id="game"></canvas>
     <script>
@@ -58,7 +58,7 @@
 
       var grid = 16;
       var count = 0;
-      var score = 0; // Initialize score
+      var score = 1; // Initialize score
 
       var snake = {
         x: 160,
@@ -124,6 +124,18 @@
           snake.cells.pop();
         }
 
+        // draw grid lines
+        for (var x = 0; x < canvas.width; x += grid) {
+          context.moveTo(x, 0);
+          context.lineTo(x, canvas.height);
+        }
+        for (var y = 0; y < canvas.height; y += grid) {
+          context.moveTo(0, y);
+          context.lineTo(canvas.width, y);
+        }
+        context.strokeStyle = "white";
+        context.stroke();
+
         // check collision with walls
         if (
           snake.x < 0 ||
@@ -175,7 +187,7 @@
               snake.maxCells = 1;
               snake.dx = grid;
               snake.dy = 0;
-              score = 0;
+              score = 1;
 
               document.getElementById("score").textContent = "Score: " + score;
 
